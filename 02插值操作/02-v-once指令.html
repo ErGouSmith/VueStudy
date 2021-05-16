@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+    <div id="app">
+        <!--v-once类似于定义常量 即该标识内的mustache变量只能初始化一次 之后不能被改变-->
+        <!--若在控制台输入app.message="123" 或在js中改变app.message 则只会改变第一个值 不会改变第二个值-->
+        <h2>{{ message }}</h2>
+        <h2 v-once>{{ message }}</h2>
+        
+    </div>
+    <script>
+        let app = new Vue({
+            el: '#app',
+            data: {
+                message: "阿斯顿马丁"
+            }
+        })
+        app.message = "abcd"
+    </script>
+</body>
+</html>

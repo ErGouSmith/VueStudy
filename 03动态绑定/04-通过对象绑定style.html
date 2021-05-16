@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- <h2 :style="{css属性名1:css属性值1, css属性名2:css属性值2,...}">{{message}}</h2> -->
+        <!-- 50px必须加上单引号, 否则会当作一个变量来解析-->
+        <h2 :style="{fontSize:'50px'}">{{message}}</h2>
+        <h2 :style="{fontSize:ftsz}">{{message}}</h2>
+        <h2 :style="{fontSize:ftsz2 + 'px'}">{{message}}</h2>
+    </div>
+    <script>
+        let app = new Vue({
+            el: "#app",
+            data:{
+                message: "abc",
+                ftsz: "50px",
+                ftsz2: "100"
+            }
+        })
+    </script>
+</body>
+</html>

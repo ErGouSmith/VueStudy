@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="app">
+        <!--以下四种方法都可以拼接两个字符串或其他简易操作 但是一般推荐使用第四种方法 即计算属性-->
+        <h2>{{firstName + ' ' + lastName}}</h2>
+        <h2>{{firstName}} {{lastName}}</h2>
+        <h2>{{getFullName()}}</h2>
+        <h2>{{fullName}}</h2>
+    </div>
+    <script>
+        let app = new Vue({
+            el: "#app",
+            data:{
+                firstName: "Lebron",
+                lastName: "James"
+            },
+            methods:{
+                getFullName(){
+                    return this.firstName + " " + this.lastName
+                }
+            },
+            //实际成员是临时函数
+            computed:{
+                fullName: function(){
+                    return this.firstName + " " + this.lastName
+                }
+            }
+        })
+    </script>
+</body>
+</html>

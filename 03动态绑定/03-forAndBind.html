@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <!--在一个列表中 有多个li 用v-for和v-bind实现 鼠标点击哪个li元素时 使其变色-->
+    <ul id="app">
+        <li v-for="(item, index) in tList" v-on:click="setColor(index)">{{item}}</li>
+    </ul>
+    <script>
+        let app = new Vue({
+            el:"#app",
+            data:{
+                tList:["火影忍者","死神","海贼王"]
+            },
+            methods:{
+                setColor(index){
+                    alert(index)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

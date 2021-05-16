@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- v-pre标识类似转义字符反斜杠, 使vue不会解析其中的mustache语法, 能够原封不动的展示内容, 例如就是想显示{{message}}-->
+        <h2>{{message}}</h2>
+        <h2 v-pre>{{message}}</h2>
+    </div>
+    <script>
+        let app = new Vue({
+            el: "#app",
+            data: {
+                message: 123
+            }
+        })
+    </script>
+</body>
+</html>

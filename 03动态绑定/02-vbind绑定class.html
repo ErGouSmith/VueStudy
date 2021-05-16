@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+    <style>
+        .active{
+            color:red
+        }
+        .aaa{
+            color:aliceblue
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!--<h2 :class="{css类1:bool值1, css类2:bool值2}">{{message}}</h2>
+            1.通过大括号绑定对象, 
+            对象内以css类为key, bool值为value, 
+            最后在脚本内通过程序操作改变bool值, 
+            来改变元素的样式
+        -->
+        <h2 :class="{active:isActive, line:isLine}">{{message}}</h2>
+        <!--
+            2.通过中括号绑定数组,
+            数组元素可以是变量, 也可以是字符串(需要用单引号包裹)
+        -->
+        <h2 :class="[value1, 'value2']">{{message}}</h2>
+        <!--
+            3.绑定函数
+            
+        -->
+        <h2 :class="getAllClass()">{{message}}</h2>
+    </div>
+    <script>
+        let app = new Vue({
+            el: "#app",
+            data: {
+                message: "ErgouSmith",
+                isActive: true,
+                isLine: false,
+                value1: "aaa",
+                value2: "bbb"
+            },
+            methods:{
+                getAllClass(){
+                    return[this.value1, this.value2]
+                }
+            }
+        })
+        function changeActive(){
+            if(app.isActive == true){
+                app.isActive = false
+            }else{
+                app.isActive = true
+            }
+        }
+        setInterval(changeActive,100)
+    </script>
+</body>
+</html>

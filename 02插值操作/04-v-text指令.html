@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+    <div id="app">
+        <!--通过v-text实现与mustache类似的效果, 但是不如mustache灵活, 会自动覆盖标签内部的内容-->
+        <h3>{{message}}, 阿斯蒂芬就</h3>
+        <h3 v-text="message"> 啊撒旦解放</h3>
+    </div>
+    <script>
+        let app = new Vue({
+            el: "#app",
+            data:{
+                message:"abc"
+            }
+        })
+    </script>
+</body>
+</html>

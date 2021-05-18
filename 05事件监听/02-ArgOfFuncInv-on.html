@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="app">
+        <!--情况1: 事件调用方法可以不写参数和括号, 下列两种代码效果相同-->
+        <button @click="btnClick()">□</button>
+        <button @click="btnClick">□</button>
+
+        <!--情况2: 在事件定义时, 写函数时省略了参数和括号, 但是方法本身是需要一个参数的, 下列两种代码效果相同-->
+        <button @click="btnClick2($event)">□</button>
+        <button @click="btnClick2">□</button>
+    </div>
+    <script>
+        let app = new Vue({
+            el:"#app",
+            data:{
+
+            },
+            methods:{
+                btnClick(){
+                    console.log("btnClick");
+                },
+                btnClick2(abc){
+                    console.log(abc);
+                }
+            }
+        })
+    </script>
+</body>
+</html>

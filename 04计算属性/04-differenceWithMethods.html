@@ -11,7 +11,12 @@
     <div class="app">
         <h2>{{getFullName()}}</h2>
         <h2>{{fullName}}</h2>
-        
+        <h2>{{getFullName()}}</h2>
+        <h2>{{fullName}}</h2>
+        <h2>{{getFullName()}}</h2>
+        <h2>{{fullName}}</h2>
+        <h2>{{getFullName()}}</h2>
+        <h2>{{fullName}}</h2>
         <h2>{{getFullName()}}</h2>
         <h2>{{fullName}}</h2>
     </div>
@@ -31,11 +36,13 @@
             },
             computed:{
                 fullName: function(){
+                    console.log("fullName");
                     return (this.firstName + " " + this.lastName);
                 }
             },
             methods:{
                 getFullName: function(){
+                    console.log("getFullName");
                     return (this.firstName + " " + this.lastName);
                 },
                 clearName: function(){

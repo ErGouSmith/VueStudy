@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <!--1 .stop修饰符的使用-->
+    <div id="app">
+        <!--点击按钮时 divClick和btnClick同时会被触发 通过Vue修饰符可以阻止外围同类型的触发-->
+        <div @click="divClick">
+            aaaaaa
+            <button @click="btnClick">btn without d/button>
+            <button @click.stop="btnClick">button</button>
+        </div>
+
+        <!--2 .prevent修饰符的使用-->
+        <form action="baidu">
+            <!--submit在提交时 默认会直接提交服务端 通过.prevent修饰符 能够先阻止 而后可以由代码操作来决定提交的内容-->
+            <input type="submit" value="提交" @click.prevent="submitClick">
+        </form>
+
+        <!--3 .{keyCode|keyAlias}修饰符的使用-->
+        <input type="text" @keyup="keyup">
+        <input type="text" @keyup.enter="enterKeyup">
+
+        <!--4 .once修饰符的使用 只触发一次回调 即仅首次有效 多次调用无效-->
+        <button @click="btnOnceClick">OnceClick</button>
+    </div>
+    <script>
+        let app = new Vue({
+            el:"#app",
+            data:{
+
+            },
+            methods:{
+                btnClick(){
+                    console.log("button Clicked!")
+                },
+                divClick(){
+                    console.log("div Clicked!")
+                },
+                submitClick(){
+                    console.log("form submit Clicked!")
+                },
+                keyup(){
+                    console.log("key Up!")
+                },
+                enterKeyup(){
+                    console.log("Enter Key UP!")
+                },
+                btnOnceClick(){
+                    console.log("button once click!")
+                }
+            }
+        })
+    </script>
+</body>
+</html>

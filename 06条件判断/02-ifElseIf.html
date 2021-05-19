@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="app">
+        
+        <h2 v-if="score>=90">优秀</h2>
+        <h2 v-else-if="score>=80">良好</h2>
+        <h2 v-else-if="score>=60">及格</h2>
+        <h2 v-else>不及格</h2>
+
+        <!--虽然使用多个标签+vue多个分支的if else if能实现, 但更简易直接在计算属性或方法中实现该效果-->
+        <h2>{{ScoreDescription}}</h2>
+    </div>
+    <script>
+        let app = new Vue({
+            el:"#app",
+            data:{
+                score:99
+            },
+            computed:{
+                ScoreDescription(){
+                    if(this.score>=90){
+                        return("优秀")
+                    }else if(this.score>=80){
+                        return("良好")
+                    }else if(this.score>=60){
+                        return("及格")
+                    }else{
+                        return("不及格")
+                    }
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>

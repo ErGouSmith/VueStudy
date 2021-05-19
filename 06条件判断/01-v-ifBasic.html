@@ -9,8 +9,21 @@
 </head>
 <body>
     <div id="app">
-
+        <h2 v-if=ifShow>{{message1}}</h2>
+        <h2 v-else>{{message2}}</h2>
     </div>
-    <
+    <script>
+        let app = new Vue({
+            el:"#app",
+            data:{
+                message1:"if content.",
+                message2:"else content",
+                ifShow:false
+            },
+            methods:{
+
+            }
+        })
+    </script>
 </body>
 </html>

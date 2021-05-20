@@ -9,20 +9,17 @@
 </head>
 <body>
     <div id="app">
-        <span v-if="loginMode=='EmailLoginMode'">
-            <form>
-                请输入邮箱:
-                <input>
-            </form>
+        <!--注:若在input框内填入内容, 在切换登录类型之后, 并不会消除内容, 这是因为vue底层会自动复用
+            通过key关键字指定不同的内容 可以避免无用的复用-->
+        <span v-if="loginMode=='AccountLoginMode'">
+            <label for="username">请输入账户:</label>
+            <input type="text" id="username" placeholder="用户账户" key="username">
         </span>
-        <span v-else-if="loginMode=='AccountLoginMode'">
-            <form>
-                请输入账户:
-                <input>
-            </form>
+        <span v-else-if="loginMode=='EmailLoginMode'">
+            <label for="username">请输入邮箱:</label>
+            <input type="text" id="email" placeholder="用户邮箱" key="email">
         </span>
         <select @change="changeLoginMode($event)">
-            请选择登录方式:
             <option value="AccountLoginMode">Login Via Account</option>
             <option value="EmailLoginMode">Login Via Email</option>
         </select>

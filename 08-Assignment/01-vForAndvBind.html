@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <!--要求:展示多个电影为列表, 一开始第一个显示为红色, 后续鼠标点击哪个, 哪个就显示红色-->
+    <div id="app">
+        <ul>
+            <li v-for="(item,index) in movieList" :style="[colorList[index]]" @click="changeRed(index)">{{item}}</li>
+        </ul>
+    </div>
+    <script>
+        let app = new Vue({
+            el:"#app",
+            data:{
+                movieList:["加勒比海盗","神盾局","漫威"],
+                redStyle:{color:'red'},
+                blackStyle:{color:'black'},
+                colorList:[this.redStyle,this.blackStyle,this.blackStyle]
+            },
+            methods:{
+                changeRed(index){
+                    console.log("changeColor")
+                    for(let arIndex in this.colorList){
+                        if(arIndex == index){
+                            this.colorList[arIndex] = this.redStyle;
+                        }else{
+                            this.colorList[arIndex] = this.blackStyle;
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

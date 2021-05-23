@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="message">
+        {{message}}
+        <!--如果没有v-model, 那么如何实现双向绑定? 通过v-bind实现从message绑定input, 通过v-on实现input绑定message-->
+        <input type="text" v-bind:value="message" v-on:input="valueChange">
+    </div>
+    <script>
+        let app = new Vue({
+            el: "#app",
+            data:{
+                message:"你好啊"
+            },
+            methods:{
+                valueChange(event){
+                    console.log(event);
+                    if(event.data === null){
+                        this.message
+                    }else{
+                        this.message += event.data;
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

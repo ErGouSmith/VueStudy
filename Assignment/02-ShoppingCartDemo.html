@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShoppingCartDemo</title>
+    <script src="../vue.js" type="text/javascript"></script>
+    <style>
+        table,table tr th, table tr td{
+            border:1px solid #252729; 
+        }
+        table { text-align: center; border-collapse: collapse;}
+    </style>
+</head>
+<body>
+    <!--完全按照要求实现作业-->
+    <div id="app1">
+        <table frame=border>
+            <caption align="top">
+                <th>序号</th>
+                <th>商品名称</th>
+                <th>添加时间</th>
+                <th>数量</th>
+                <th>价格</th>
+                <th>操作</th>
+            </caption>
+            <tr v-for="(goodObj,index) in ShoppingCart">
+                <td>{{index + 1}}</td>
+                <td v-for="(value,key) in goodObj">
+                    <span v-if="key == 'price'"> ￥ </span>
+                    <button v-if="key == 'amount'" @click="decreaseAmount(index)"> - </button>
+                    {{value}}
+                    <button v-if="key == 'amount'" @click="increaseAmount(index)"> + </button>
+                </td>
+                <td>
+                    <button @click="removeItem(index)"> 移除 </button>
+                </td>
+            </tr>
+        </table>
+        <div >TotalPrice:{{sumPrice}}</div>
+    </div>
+    <script>
+        let app1 = new Vue({
+            el:"#app1",
+            data:{
+                ShoppingCart:[
+                    {goodsName:"《算法导论》",addCartTime:"2006-9",amount:2,price:75},
+                    {goodsName:"《UNIX编程艺术》",addCartTime:"2006-9",amount:3,price:24},
+                    {goodsName:"《编程珠玑》",addCartTime:"2006-9",amount:1,price:75},
+                    {goodsName:"《代码大全》",addCartTime:"2006-9",amount:4,price:97}
+                ]
+            },
+            methods:{
+                increaseAmount(index){
+                    this.ShoppingCart[index].amount++;
+                },
+                decreaseAmount(index){
+                    this.ShoppingCart[index].amount--;
+                    if(this.ShoppingCart[index].amount == 0){
+                        this.ShoppingCart.splice(index,1);
+                    }
+                },
+                removeItem(index){
+                    this.ShoppingCart.splice(index,1);
+                }
+            },
+            computed:{
+                sumPrice(){
+                    result = 0;
+                    for(let ele of this.ShoppingCart){
+                        result += ele["amount"] * ele["price"];
+                    }
+                    return(result);
+                }
+            }
+        })
+    </script>
+
+    <!--在1的基础上, 增加一个录入商品的功能-->
+    <div id="app2">
+        <table frame=border>
+            <caption align="top">
+                <th>序号</th>
+                <th>商品名称</th>
+                <th>添加时间</th>
+                <th>数量</th>
+                <th>价格</th>
+                <th>操作</th>
+            </caption>
+            <tr v-for="(goodObj,index) in ShoppingCart">
+                <td>{{index + 1}}</td>
+                <td v-for="(value,key) in goodObj">
+                    <span v-if="key == 'price'"> ￥ </span>
+                    <button v-if="key == 'amount'" @click="decreaseAmount(index)"> - </button>
+                    {{value}}
+                    <button v-if="key == 'amount'" @click="increaseAmount(index)"> + </button>
+                </td>
+                <td>
+                    <button @click="removeItem(index)"> 移除 </button>
+                </td>
+            </tr>
+        </table>
+        <div >TotalPrice:{{sumPrice}}</div>
+        <form>
+            <h4>增加新商品:</h4>
+            <input type="text" v-model="goodsName">
+            <input type="text" v-model="addCartTime">
+            <input type="text" v-model="amount">
+            <input type="text" v-model="price">
+            <button @click="addNewGoodsIntoShoppingCart">add</button>
+        </form>
+    </div>
+    <script>
+        let app2 = new Vue({
+            el:"#app2",
+            data:{
+                ShoppingCart:[],
+                goodsName:"",
+                addCartTime:"",
+                amount:1,
+                price:0
+            },
+            methods:{
+                addNewGoodsIntoShoppingCart(goodsName,addCartTime,amount=1,price="0"){
+                    createNewGoods(this.goodsName,this.addCartTime,this.amount,this.price)
+                },
+                createNewGoods(goodsName,addCartTime,amount=1,price="0"){
+                    this.goodsName = goodsName;
+                    this.addCartTime = addCartTime;
+                    this.amount = amount;
+                    this.price = "￥" + price;
+                    this.operation = "";
+                },
+                increaseAmount(index){
+                    this.ShoppingCart[index].amount++;
+                },
+                decreaseAmount(index){
+                    this.ShoppingCart[index].amount--;
+                    if(this.ShoppingCart[index].amount == 0){
+                        this.ShoppingCart.splice(index,1);
+                    }
+                },
+                removeItem(index){
+                    this.ShoppingCart.splice(index,1);
+                }
+            }
+        })
+    </script>
+</body>
+</html>

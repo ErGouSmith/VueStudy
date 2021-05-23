@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <table>
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>书籍名称</th>
+                    <th>出版日期</th>
+                    <th>价格</th>
+                    <th>购买数量</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr v-for="bookObj in books">
+                    <td v-for="(value,key) in bookObj">
+                        <span v-if="key == 'price'"> ￥ </span>
+                        <button v-if="key == 'amount'" @click="decreaseAmount(index)"> - </button>
+                        {{value}}
+                        <button v-if="key == 'amount'" @click="increaseAmount(index)"> + </button>
+                    </td>
+                    <td>
+                        <button @click="removeItem(index)"> 移除 </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="../../vue.js" type="text/javascript"></script>
+    <script src="main.js"></script>
+</body>
+</html>

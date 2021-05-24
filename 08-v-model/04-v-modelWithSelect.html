@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 情况1: 下拉选 单选 -->
+        <select name="abc" v-model="fruit">
+            <option value="苹果">苹果</option>
+            <option value="香蕉">香蕉</option>
+            <option value="荔枝">荔枝</option>
+            <option value="橙子">橙子</option>
+            <option value="榴莲">榴莲</option>
+        </select>
+        <h3>你选择的水果是: {{fruit}}</h3>
+
+        <!-- 情况2: 下拉选 多选 -->
+        <!-- 注:多选需要摁住ctrl键 -->
+        <select name="bcd" v-model="fruits" multiple>
+            <option value="苹果">苹果</option>
+            <option value="香蕉">香蕉</option>
+            <option value="荔枝">荔枝</option>
+            <option value="橙子">橙子</option>
+            <option value="榴莲">榴莲</option>
+        </select>
+        <h3>你选择的水果有: {{fruits}}</h3>
+    </div>
+    <script>
+        let app = new Vue({
+            el:"#app",
+            data:{
+                fruit:"香蕉",
+                fruits:[]
+            }
+        })
+    </script>
+</body>
+</html>

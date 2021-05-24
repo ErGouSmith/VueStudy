@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- checkbox单选框 -->
+        <label for="agreementLicense">
+            <input type="checkbox" id="agreementLicense" v-model="isAgree">同意协议
+        </label>
+        <h2>您选择了{{isAgree}}</h2>
+        <button :disabled="!isAgree">下一步</button>
+
+        <!-- checkbox多选框 通过v-model实现对数组的绑定-->
+        <input type="checkbox" value="篮球" v-model="hobbies">篮球
+        <input type="checkbox" value="足球" v-model="hobbies">足球
+        <input type="checkbox" value="乒乓球" v-model="hobbies">乒乓球
+        <input type="checkbox" value="羽毛球" v-model="hobbies">羽毛球
+        <input type="checkbox" value="悠悠球" v-model="hobbies">悠悠球
+
+        <h3>{{hobbies}}</h3>
+    </div>
+    <script>
+        let app = new Vue({
+            el:"#app",
+            data:{
+                isAgree:false,
+                hobbies:[]
+            }
+        })
+    </script>
+</body>
+</html>

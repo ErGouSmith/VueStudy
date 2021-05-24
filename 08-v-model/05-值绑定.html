@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 值绑定能够实现在input单选,复选以及select下拉选中, 从数据库或其他地方加载能够选择的value列表, 而不是写死在前端页面中 -->
+        <label v-for="item in jobList">
+            <input type="checkbox" :value="item" v-model="jobSelected">{{item}}
+        </label>
+        <h3>The jobs you want including: {{jobSelected}}</h3>
+    </div>
+    <script>
+        let app = new Vue({
+            el:"#app",
+            data:{
+                jobList:["Project Manager","Product Manager","Finance Officer"],
+                jobSelected:[]
+            }
+        })
+    </script>
+</body>
+</html>

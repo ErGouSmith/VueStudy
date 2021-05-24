@@ -12,7 +12,10 @@
         <input type="text" v-model="message">
         {{message}}
         <!--如果没有v-model, 那么如何实现双向绑定? 通过v-bind实现从message绑定input, 通过v-on实现input绑定message-->
+        <!--其实v-model本身就是个语法糖, 就是下面两种操作的结合-->
         <input type="text" v-bind:value="message" v-on:input="valueChange">
+        <!--也可以简写为-->
+        <input type="text" v-bind:value="message" v-on:input="$event.target.value">
     </div>
     <script>
         let app = new Vue({
@@ -23,11 +26,7 @@
             methods:{
                 valueChange(event){
                     console.log(event);
-                    if(event.data === null){
-                        this.message
-                    }else{
-                        this.message += event.data;
-                    }
+                    this.message = event.target.value;
                 }
             }
         })

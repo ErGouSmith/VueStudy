@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="app">
+        <label for="male">
+            <!--当vmodel遇到radio，除了双向绑定，还有下列两点作用
+                1.多个type为radio类型的input单选按钮,通过指定相同的name属性,可以组成一组选项(即互斥性,只能选择其中的一个),通过v-model绑定相同的data的key能直接实现相同的效果
+                2.通过v-model绑定的一组单选按钮, 会默认选择data中初始化给定的默认值-->
+            <input type="radio" id="male" value="男" v-model="sex">男
+        </label>
+        <label for="female">
+            <input type="radio" id="female" value="女" v-model="sex">女
+        </label>
+        <h2>{{sex}}</h2>
+    </div>
+    <script>
+        let app = new Vue({
+            el:"#app",
+            data:{
+                message:"hello",
+                sex:"女"
+            }
+        })
+    </script>
+</body>
+</html>

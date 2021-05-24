@@ -20,7 +20,9 @@
 
         <br>
         <!-- 修饰符3: trim 用于删除左右的空格-->
-        <input type="text" v-model="name">
+        <!-- 注意: 浏览器在展示时会自动去掉左右空格, 但实际后台数据中会保存左右的空格, 而trim能够避免-->
+        <input type="text" v-model.trim="name">
+        <h3>The name you input is : {{name}}</h3>
     </div>
     <script>
         let app = new Vue({
@@ -28,7 +30,8 @@
             data:{
                 message:"hello",
                 age:0,
-                age2:0
+                age2:0,
+                name:""
             }
         })
     </script>

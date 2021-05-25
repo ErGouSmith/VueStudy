@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="app">
+        <cpn1></cpn1>
+        <cpn2></cpn2>
+    </div>
+
+    <template id="cpnC1">
+        <div>
+            <h3>组件中使用mustache语法引用vue的数据</h3>
+            <p>{{message}}</p>
+            <p>上述代码中 使用mustache语法引用vue实例的数据会直接报错</p>
+        </div>
+    </template>
+
+    <script>
+
+        Vue.component('cpn2',{
+            template:`
+                <div>
+                    <h3>组件中使用数据的正确方式</h3>
+                    <p>在定义组件对象时, 在template并列的写入属性data, data要求是一个返回对象实例的函数</p>
+                    <p>{{message}}</p>
+                </div>
+            `,
+            data(){
+                return {
+                    message:"组件对象中data属性返回的对象实例中的数据"
+                }
+            }
+        })
+
+        let app = new Vue({
+            el:"#app",
+            data:{
+                message:"Vue实例内的数据"
+            },
+            components:{
+                cpn1:{
+                    template:"#cpnC1"
+                }
+            }
+        })
+    </script>
+</body>
+</html>

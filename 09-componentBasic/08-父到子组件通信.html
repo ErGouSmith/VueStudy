@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>父组件到子组件通信</title>
+    <script src="../vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="app">
+        <cpn1 ></cpn1>
+    </div>
+    <template id="">
+        <div>
+
+        </div>
+    </template>
+    <script>
+        //将根组件, 也是父组件的movies传递给子组件
+        let cpn1 = {
+            template:``,
+            props:['cmovies','cmessage'] //props可以是数组 也可以是对象
+        }
+
+        let app = new Vue({
+            el:"#app",
+            data:{
+                message:"hello",
+                movies:["海王","海贼王","海尔兄弟","加勒比海盗"]
+            },
+            components:{
+                cpn1 //等同于 cpn1: 'cpn1'
+            }
+        })
+    </script>
+</body>
+</html>

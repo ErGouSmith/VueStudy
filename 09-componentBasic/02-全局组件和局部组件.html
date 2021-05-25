@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <!--通过两个vue实例绑定两个div, 两个div下都可以使用该cpnC组件, 是因为这个组件是注册在vue实例之外的全局组件-->
+    <div id="app">
+        <cpnglobal></cpnglobal>
+    </div>
+    
+    <div id="app2">
+        <cpnglobal></cpnglobal>
+        <!--如果在其他地方调用局部组件, 则会报错-->
+        <cpnlocal></cpnlocal>
+    </div>
+    
+    <!--如果将一个组件注册在某个vue实例内部, 则成为局部组件, 只有该vue实例的范围内才可以调用-->
+    <div id="app3">
+        <cpnlocal></cpnlocal>
+    </div>
+
+    <script>
+        let cpnCGlobal = Vue.extend({
+            template:`
+                <div>
+                    <h2>全局组件</h2>
+                    <p>调用全局组件</p>
+                </div>
+            `
+        })
+
+        let cpnCLocal = Vue.extend({
+            template:`
+                <div>
+                    <h2>局部组件</h2>
+                    <p>调用局部组件</p>
+                </div>
+            `
+        })
+
+        Vue.component('cpnglobal',cpnCGlobal)
+
+        let app = new Vue({
+            el:"#app"
+        })
+        let app2 = new Vue({
+            el:"#app2"
+        })
+        let app3 = new Vue({
+            el:"#app3",
+            components:{
+                cpnlocal: cpnCLocal
+            }
+        })
+    </script>
+</body>
+</html>

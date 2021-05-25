@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="app">
+        <!--为什么组件对象的data属性, 在设计时要设计成一个返回对象实例的函数?
+            因为在多次调用该组件时, 只有每次调用都返回一个新的data内的实例, 才能做到每次组件调用互不影响
+            -->
+        <cpn1></cpn1>
+        <cpn1></cpn1>
+        <cpn1></cpn1>
+    </div>
+
+    <template id="cpnTp1">
+        <div>
+            <h3>counter: {{counter}}</h3>
+            <button v-on:click="increase">+</button>
+            <button v-on:click="decrease">-</button>
+        </div>
+    </template>
+
+    <script>
+        Vue.component('cpn1',{
+                template:'#cpnTp1',
+                data(){
+                    return{
+                        counter:0
+                    }
+                },
+                methods:{
+                    increase(){
+                        this.counter++;
+                    },
+                    decrease(){
+                        this.counter--;
+                    }
+                }
+            }
+
+        )
+        let app = new Vue({
+            el:"#app",
+            data:{
+                message:"hello"
+            }
+        })
+    </script>
+</body>
+</html>

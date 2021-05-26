@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>组件通信-子传父</title>
+    <script src="../vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <!--子组件里发生的事件和信息 需要传递到父组件-->
+
+    <!--父组件模板-->
+    <div id="app">
+        <!-- 父组件监听事件 默认会将emit的第一个非名称参数传递过去-->
+        <cpncategories v-on:item-click="categoriesClick"></cpncategories>
+    </div>
+
+    <!--子组件模板-->
+    <template id="cpncategories">
+        <div>
+            <button v-for="item in categories" @click="btnClick(item,$event)">{{item.name}}</button>
+        </div>
+    </template>
+
+    <script>
+        let cpnCategories = {
+            template: "#cpncategories",
+            data(){
+                return{
+                    categories:[
+                        {id:0, name:"热门推荐"},
+                        {id:1, name:"手机数码"},
+                        {id:2, name:"家用电器"},
+                        {id:3, name:"食物"}
+                    ]
+                }
+            },
+            methods:{
+                btnClick(item,event){
+                    //console.log(item);
+                    //子组件发送事件 参数分别为: (自定义事件名称, 自定义事件参数)
+                    this.$emit('item-click', item)
+                }
+            }
+        }
+
+        let app = new Vue({
+            el:"#app",
+            data:{
+            },
+            components:{
+                cpncategories : cpnCategories
+            },
+            methods:{
+                categoriesClick(item){
+                    console.log(item.name)
+                }
+            }
+        })
+    </script>
+
+    <!-- 案例2 子组件负责增加和减少按钮, 父组件展示counter -->
+    <div id="app2">
+        <h3>{{counter}}</h3>
+        <cpn2 @value-change="cpnChangeCounter"></cpn2>
+    </div>
+
+    <template id="btn">
+        <div>
+            <button @click="changeCounter(1)">增加</button>
+            <button @click="changeCounter(-1)">减少</button>
+        </div>
+    </template>
+
+    <script>
+        let cpn2 = {
+            template: "#btn",
+            methods:{
+                changeCounter(cValue){
+                    this.$emit("value-change",cValue)
+                }
+            }
+        }
+
+        let app2 = new Vue({
+            el:"#app2",
+            data:{
+                counter:0
+            },
+            components:{
+                cpn2
+            },
+            methods:{
+                cpnChangeCounter(value){
+                    this.counter += value;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -6,18 +6,56 @@
 </head>
 <body>
     <div id="app">
-        <cpn1 ></cpn1>
+        <!-- 在这里进行绑定和传递动作 -->
+        <cpn1 :cmovies="movies" :cmessage="message"></cpn1>
     </div>
-    <template id="">
+    <template id="cpn1">
         <div>
-
+            <p>{{cmovies}}</p>
+            <h2>{{cmessage}}</h2>
+            <ul>
+                <li v-for="item in cmovies">{{item}}</li>
+            </ul>
         </div>
     </template>
     <script>
-        //将根组件, 也是父组件的movies传递给子组件
+        //将根组件, 也是父组件的Vue实例app中的movies和message传递给子组件
         let cpn1 = {
-            template:``,
-            props:['cmovies','cmessage'] //props可以是数组 也可以是对象
+            template:'#cpn1',
+            //1.props数组写法 很少用
+            //props:['cmovies','cmessage']    //此处数组内的为props内部定义的变量, 以字符串的形式表示变量名
+
+            //2.props对象写法
+            props:{
+                //2.1 对象写法第一种, 需要写明类型, 注:支持的类型有很多种
+                // cmovies: Array,
+                // cmessage: String
+
+                //2.2 对象写法第二种 可以提供默认值 设置是否必须传值 以及可以自定义验证函数
+                cmessage:{
+                    type: String,       //设置类型
+                    default: 'aaaaaa',  //设置默认值
+                    required: true,     //设置该变量是否必传
+                    validator: function(value){ //验证值是否匹配以下字符串中的一个
+                        return ['hello', 'warning', 'danger'].indexOf(value) !== -1
+                    }
+                },
+                //注: 当给Array或Object方法设置默认值时, 不能写作:"default:[]" 必须是一个工厂函数 返回默认值
+                cmovies:{
+                    type: Array,
+                    default(){
+                        return []
+                    },
+                    required: true
+                }
+            }
+        }
+
+        let cpn2 = {
+            template:'#cpn2',
+            props:{
+
+            }
         }
 
         let app = new Vue({

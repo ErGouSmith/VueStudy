@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 若使用驼峰标志命名, 例如'CInfo', 由于html不支持大写, 会自动将大写的属性转换为小写, 就会导致程序错误 -->
+        <cpn1 :cInfo="info"></cpn1>
+    </div>
+
+    <template id="cpn1">
+        <div>
+            <h3>{{cInfo}}</h3>
+        </div>
+    </template>
+
+    <script>
+        let cpn1 = {
+            template:"#cpn1",
+            props:{
+                cInfo:{
+                    type: Object,
+                    default(){
+                        return {}
+                    }
+                }
+            }
+        }
+
+        let app = new Vue({
+            el:"#app",
+            components:{
+                cpn1
+            },
+            data:{
+                info:{
+                    name:"ErgouSmith",
+                    age: 28,
+                    sex: "male"
+                }
+            }
+        })
+    </script>
+</body>
+</html>

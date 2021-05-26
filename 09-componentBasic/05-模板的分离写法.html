@@ -8,6 +8,7 @@
     <div id="app">
         <cpn1></cpn1>
         <cpn2></cpn2>
+        <cpn3></cpn3>
     </div>
 
     <!--方法1: 使用text/x-template类型的script标签-->
@@ -26,13 +27,28 @@
         </div>
     </template>
 
+    <template id="my-cpn3">
+        <div>
+            <h2>Third Mode---template</h2>
+            <p>组件模板的分离写法 局部变量的情况 用template标签 包含所有web组件</p>
+        </div>
+    </template>
+
     <script>
-        //1 组件模板的分离写法
+        //1 全局组件模板的分离写法
         Vue.component("cpn1",{template:"#my-cpn"});
         Vue.component("cpn2",{template:"#my-cpn2"});
 
+        //局部组件的分离写法
+        let cpn3 = {
+            template:'#my-cpn3'
+        }
+
         let app = new Vue({
-            el:"#app"
+            el:"#app",
+            components:{
+                cpn3: cpn3
+            }
         })
     </script>
 </body>

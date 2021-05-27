@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>编译作用域</title>
+    <script type="text/javascript" src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- 当父子组件都有该变量时 使用哪个isShow变量? 由于该代码在根作用域的范围内 因此使用了根组件的变量 -->
+        <cpn1 v-show="isShow"></cpn1>
+    </div>
+
+    <template id="cpn1">
+        <div>
+            <h3>Component</h3>
+            <p>This is the first component.</p>
+        </div>
+    </template>
+
+    <script>
+        let cpn1 = {
+            template: "#cpn1",
+            data(){
+                return{
+                    isShow: false
+                }
+            }
+        }
+
+        let app = new Vue({
+            el:"#app",
+            data:{
+                isShow: true
+            },
+            components:{
+                cpn1
+            }
+        })
+    </script>
+</body>
+</html>

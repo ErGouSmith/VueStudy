@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <cpn1>
+            <span slot="mid">替换中间的插槽</span>
+            <button slot="right">替换右边的插槽</button>
+        </cpn1>
+    </div>
+
+    <template id="cpn1">
+        <div>
+            <h3>Component</h3>
+            <p>This is the first component.</p>
+            <slot name="left"><span>Slot1</span></slot>
+            <slot name="mid"><span>Slot2</span></slot>
+            <slot name="right"><span>Slot3</span></slot>
+        </div>
+    </template>
+
+    <script>
+        let cpn1 = {
+            template: "#cpn1"
+        }
+
+        let app = new Vue({
+            el:"#app",
+            data:{},
+            components:{
+                cpn1
+            }
+        })
+    </script>
+</body>
+</html>

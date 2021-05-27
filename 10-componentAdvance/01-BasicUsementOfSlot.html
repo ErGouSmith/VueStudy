@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <cpn1><button>插槽中的按钮1</button></cpn1>
+        <cpn1><span>插槽中的span</span></cpn1>
+        <cpn1><i>插槽中的i标签</i></cpn1>
+        <cpn1>
+            <div>Div 标签</div>
+            <p> P 标签 </p>
+        </cpn1>
+        <cpn1></cpn1>
+    </div>
+
+    <template id="cpn1">
+        <div>
+            <h3>Component</h3>
+            <p>This is the first component.</p>
+            <!--插槽相当于预留的空间/接口 使得该组件能够在不同位置调用时, 提供不同的内容和功能-->
+            <!-- 抽取共性->组件, 保留不同->插槽 -->
+            <!-- 插槽中的内容为该插槽的默认值 -->
+            <slot><button>插槽的默认按钮</button></slot>
+            <slot></slot>
+        </div>
+    </template>
+
+    <script>
+        let cpn1 = {
+            template: "#cpn1"
+        }
+
+        let app = new Vue({
+            el:"#app",
+            data:{},
+            components:{
+                cpn1
+            }
+        })
+    </script>
+</body>
+</html>

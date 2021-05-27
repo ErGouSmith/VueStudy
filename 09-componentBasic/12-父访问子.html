@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <title>document</title>
+    <script src="../vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="app">
+        <cpn1 ref="aaa"></cpn1>
+        <cpn1></cpn1>
+        <cpn1></cpn1>
+        <button @click="btnClick">showchildren</button>
+    </div>
+
+    <template id="cpn1">
+        <div>
+            <h3 v-on:click="showMessage">showMessage</h3>
+        </div>
+    </template>
+
+    <script>
+        let cpn1 = {
+            template: "#cpn1",
+            methods:{
+                showMessage(){
+                    console.log(this.$parent)
+                }
+            },
+            data(){
+                return{
+                    name:"子组件A"
+                }
+            }
+        }
+
+        let app = new Vue({
+            el:"#app",
+            data:{
+                message:"hello"
+            },
+            components:{
+                cpn1
+            },
+            methods:{
+                btnClick(){
+                    // 1.$children
+                    // console.log(this.$children)
+                    // for(let ele of this.$children){
+                    //     //console.log(ele)
+                    //     console.log(ele.name);
+                    //     //ele.showMessage();
+
+                    //2.$refs 默认情况是空对象 只有在组件调用时 加上html标签属性ref 例如<cpn ref="abcd" 才会有内容
+                    console.log(this.$refs.aaa.name);
+                }
+            }
+        })
+    </script>
+</body>
+</html>

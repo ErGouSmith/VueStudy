@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../vue.js"></script>
+</head>
+<body>
+    <!--要求1:根组件有两个值 num1 num2, 通过子组件展示, 并且子组件包含input, 需要与根组件的这两个值同步-->
+    <!--要求2:不管怎么变动, num1需要是num2的一百倍, num2需要是num1的百分之一-->
+    <div id="app">
+        <cpn1 :number1="num1" :number2="num2" @change-number1="changeNum1" @change-number2="changeNum2"></cpn1>
+    </div>
+
+    <template id="cpn1">
+        <div>
+            <p>root data num1: {{number1}}</p>
+            <p>component props number1: {{pnumber1}}</p>
+            num1:<input @input="changeNumber1" :value="pnumber1">
+            <p>root data num2: {{number2}}</p>
+            <p>component props number2: {{pnumber2}}</p>
+            num2:<input @input="changeNumber2" :value="pnumber2">
+        </div>
+    </template>
+
+    <script>
+        let cpn1 = {
+            template: "#cpn1",
+            props:{
+                number1: Number,
+                number2: Number
+            },
+            methods:{
+                changeNumber1(event){
+                    value = parseInt(event.target.value);
+                    this.pnumber1 = value;
+                    this.pnumber2 = value*100;
+                    this.$emit("change-number1",value);
+                    this.$emit("change-number2",value * 100);
+                },
+                changeNumber2(event){
+                    value = parseInt(event.target.value)
+                    this.pnumber2 = value;
+                    this.pnumber1 = value/100;
+                    this.$emit("change-number2",value)
+                    this.$emit("change-number1",value / 100)
+                }
+            },
+            data(){
+                return{
+                    pnumber1: this.number1,
+                    pnumber2: this.number2
+                }
+            }
+        }
+
+        let app = new Vue({
+            el:"#app",
+            data:{
+                num1:0,
+                num2:1
+            },
+            components:{
+                cpn1
+            },
+            methods:{
+                changeNum1(value){
+                    this.num1=value;
+                },
+                changeNum2(value){
+                    this.num2=value;
+                }
+            }
+        })
+    </script>
+</body>
+</html>

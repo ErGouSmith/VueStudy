@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <cpn1></cpn1>
+    </div>
+
+    <template id="cpn1">
+        <div>
+            <h3>children component1</h3>
+            <button @click="btnClick">show $parent in console</button>
+            <cpn2></cpn2>
+        </div>
+    </template>
+
+    <template id="cpn2">
+        <div>
+            <h3>grandson component2</h3>
+            <button @click="btnClick">show $parent in console</button>
+        </div>
+    </template>
+
+    <script>
+        let cpn2 = {
+            template:"#cpn2",
+            methods:{
+                btnClick(){
+                    console.log(this.$parent);
+
+                    //访问根组件
+                    console.log(this.$root);
+                }
+            }
+        }
+
+        let cpn1 = {
+            template:"#cpn1",
+            methods:{
+                btnClick(){
+                    console.log(this.$parent._data.message);
+                }
+            },
+            components:{
+                cpn2
+            }
+        }
+
+        let app = new Vue({
+            el:"#app",
+            data:{
+                message:"root component"
+            },
+            components:{
+                cpn1
+            }
+        })
+    </script>
+</body>
+</html>

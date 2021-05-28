@@ -10,8 +10,14 @@
 <body>
     <div id="app">
         <cpn1>
+            <!-- 老版本Vue用 slot="name" -->
             <span slot="mid">替换中间的插槽</span>
             <button slot="right">替换右边的插槽</button>
+            
+            <!-- 新版本Vue用 v-slot:name (2.6版本以上), 且v-slot只能用在<template>标签内部 与老版本的不同.-->
+            <template v-slot:left>
+                <button>替换左边的插槽</button>
+            </template>
         </cpn1>
     </div>
 

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../vue.js"></script>
+</head>
+<body>
+    <!-- 需求: 子组件中有一组数据, 需要在多个界面展示成不同的风格:
+        1 水平方向一一展示元素;
+        2 列表形式展示元素;
+        3 直接展示数组
+        内容在子组件中, 不同的风格由不同的父组件来确定
+    -->
+    <div id="app">
+        <!-- 关键是如何获取子组件中的数据, 如果使用$children, $refs, 由于是在渲染时才能访问, 因此无法使用, 例如下列方式会报错-->
+        <!-- 
+        <cpn1>
+            <template v-slot:style1>
+                <ul>
+                    <li v-for="ele in $children.pLanguages">ele</li>
+                </ul>
+            </template>
+        </cpn1>
+        -->
+
+        <cpn1>
+            <template v-slot:style1="slotProps">
+                <ul>
+                    <li v-for="ele in slotProps.data">{{ele}}</li>
+                </ul>
+            </template>
+        </cpn1>
+
+        <cpn1>
+            <template v-slot:style2="slotProps">
+                <span v-for="ele in slotProps.data"> {{ele}} </span>
+            </template>
+        </cpn1>
+
+        <!-- 老版本中使用的是 slot-scope 从2.6开始统一使用v-slot 从3.0开始不再支持slot和slot-scope -->
+        <!-- 老版本 slot="style3" slot-scope="slotProps"
+            与新版本 v-slot:style3="slotProps" 效果相同 -->
+        <cpn1>
+            <template slot="style3" slot-scope="slotProps">
+                {{slotProps.data}}
+            </template>
+        </cpn1>
+    </div>
+
+    <template id="cpn1">
+        <div>
+            <h3>Component</h3>
+            <slot name="style1" :data="pLanguages"></slot>
+            <slot name="style2" :data="pLanguages"></slot>
+            <slot name="style3" :data="pLanguages"></slot>
+        </div>
+    </template>
+
+    <script>
+        let cpn1 = {
+            template: "#cpn1",
+            data(){
+                return{
+                    pLanguages: ["JavaScript","Python","Swift","Go","C++","C#"]
+                }
+            }
+        }
+
+        let app = new Vue({
+            el:"#app",
+            data:{},
+            components:{
+                cpn1
+            }
+        })
+    </script>
+</body>
+</html>

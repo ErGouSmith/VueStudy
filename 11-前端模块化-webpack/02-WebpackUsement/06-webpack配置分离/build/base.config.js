@@ -2,14 +2,13 @@ const path = require("path")    //导入path模块
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 const webpack = require("webpack")
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const UglifyjsWebpackPlugin = require("uglifyjs-webpack-plugin")
 
 module.exports = {
     entry:"./src/main.js",
     output:{
-        path: path.resolve(__dirname, "dist"), //此处只能使用绝对路径, 因此需要动态的获取路径
-        filename:"bundle.js"
-        //publicPath: 'dist/' //为任何url相关连接的文件设置目录, 不设置的话打包时会导致这些文件路径错误;
+        path: path.resolve(__dirname, "../dist"), //此处只能使用绝对路径, 因此需要动态的获取路径
+        filename:"bundle.js",
+        // publicPath: 'dist/' //为任何url相关连接的文件设置目录, 不设置的话打包时会导致这些文件路径错误;
     },
     module: {
         rules: [
@@ -59,11 +58,5 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: 'index.html'
         }),
-        new UglifyjsWebpackPlugin()
     ],
-    //webpack的小型本地服务器
-    devServer:{ //默认8080端口
-        contentBase:'./dist',   //
-        inline: true    //是否实时刷新页面
-    }
 }
